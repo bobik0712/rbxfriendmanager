@@ -1,4 +1,4 @@
-const API = "https://roblox-api-service-dvlad3712-2694-zenzeyas.vercel.app";
+const API = "https://roblox-api-service.vercel.app";
 
 async function getUserId(username) {
     const response = await fetch(`${API}/user/${username}`);
