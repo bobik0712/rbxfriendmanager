@@ -1,21 +1,7 @@
-// ===============================
-// RBX Friend Manager
-// api.js
-// ===============================
+const API = "https://твій-проксі-сервер.com";
 
-// Отримати ID користувача за ніком
 async function getUserId(username) {
-
-    const response = await fetch("https://users.roblox.com/v1/usernames/users", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            usernames: [username],
-            excludeBannedUsers: false
-        })
-    });
+    const response = await fetch(`${API}/user/${username}`);
 
     if (!response.ok) {
         throw new Error("Failed to get user ID.");
@@ -23,35 +9,21 @@ async function getUserId(username) {
 
     const data = await response.json();
 
-    if (!data.data.length) {
-        throw new Error("User not found.");
-    }
-
-    return data.data[0].id;
-
+    return data.id;
 }
 
-// Отримати інформацію про профіль
 async function getProfile(userId) {
-
-    const response = await fetch(
-        `https://users.roblox.com/v1/users/${userId}`
-    );
+    const response = await fetch(`${API}/profile/${userId}`);
 
     if (!response.ok) {
         throw new Error("Failed to load profile.");
     }
 
     return await response.json();
-
 }
 
-// Отримати аватар
 async function getAvatar(userId) {
-
-    const response = await fetch(
-        `https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=180x180&format=Png&isCircular=false`
-    );
+    const response = await fetch(`${API}/avatar/${userId}`);
 
     if (!response.ok) {
         throw new Error("Failed to load avatar.");
@@ -59,16 +31,11 @@ async function getAvatar(userId) {
 
     const data = await response.json();
 
-    return data.data[0].imageUrl;
-
+    return data.imageUrl;
 }
 
-// Отримати список друзів
 async function getFriends(userId) {
-
-    const response = await fetch(
-        `https://friends.roblox.com/v1/users/${userId}/friends`
-    );
+    const response = await fetch(`${API}/friends/${userId}`);
 
     if (!response.ok) {
         throw new Error("Failed to load friends.");
@@ -76,6 +43,5 @@ async function getFriends(userId) {
 
     const data = await response.json();
 
-    return data.data;
-
+    return data;
 }
