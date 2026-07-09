@@ -1,4 +1,4 @@
-const API = "https://roblox-api-service.vercel.app";
+const API = "https://rbxapiserver.vercel.app";
 
 // Отримати ID користувача
 async function getUserId(username) {
