@@ -60,7 +60,10 @@ window.onload = async function () {
 
 async function loadFriends(userId){
 
-    const friends = await getFriends(userId);
+    const data = await getFriends(id);
+
+const friends = data.friends;
+const count = data.count;
 
     document.getElementById("friendsCount").textContent =
         friends.length;
