@@ -4,25 +4,24 @@ const API = "https://rbxapiserver.vercel.app";
 // Отримати ID користувача
 async function getUserId(username) {
 
-    const response = await fetch(
-        `${API}/api/user?username=${encodeURIComponent(username)}`
-    );
+    const url = `${API}/api/user?username=${encodeURIComponent(username)}`;
+
+    console.log("URL:", url);
+
+    const response = await fetch(url);
+
+    console.log("STATUS:", response.status);
+    console.log("OK:", response.ok);
+
+    const text = await response.text();
+
+    console.log("BODY:", text);
 
     if (!response.ok) {
-
-        const text = await response.text();
-
-        console.error("Server response:", text);
-
-        throw new Error(
-            `User API Error: ${response.status}`
-        );
-
+        throw new Error(`User API Error: ${response.status}`);
     }
 
-    const data = await response.json();
-
-    console.log(data);
+    const data = JSON.parse(text);
 
     return data.id;
 
