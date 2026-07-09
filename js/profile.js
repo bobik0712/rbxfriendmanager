@@ -48,11 +48,42 @@ async function loadFriends(userId) {
 
     const data = await getFriends(userId);
 
-    const friends = data.friends;
-
     document.getElementById("friendsCount").textContent =
         data.count;
 
-    console.log(friends);
+    displayFriends(data.friends);
+
+}
+
+async function displayFriends(friends) {
+
+    const grid = document.getElementById("friendGrid");
+
+    grid.innerHTML = "";
+
+    for (const friend of friends) {
+
+        const avatar = await getAvatar(friend.id);
+
+        const card = document.createElement("div");
+
+        card.className = "friend-card";
+
+        card.innerHTML = `
+            <img src="${avatar}" alt="${friend.name}">
+            <h3>${friend.displayName}</h3>
+            <p>@${friend.name}</p>
+        `;
+
+        card.onclick = () => {
+
+            window.location.href =
+                `profile.html?user=${friend.name}`;
+
+        };
+
+        grid.appendChild(card);
+
+    }
 
 }
