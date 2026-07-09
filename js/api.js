@@ -63,3 +63,21 @@ async function getFriends(userId) {
     return await response.json();
 
 }
+
+async function getAvatars(ids) {
+
+    const response = await fetch(
+
+        `${API}/api/avatar?ids=${ids.join(",")}`
+
+    );
+
+    if (!response.ok) {
+
+        throw new Error("Failed to load avatars.");
+
+    }
+
+    return await response.json();
+
+}
