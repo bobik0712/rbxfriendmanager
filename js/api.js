@@ -1,7 +1,7 @@
 const API = "https://roblox-api-service.vercel.app";
 
 async function getUserId(username) {
-    const response = await fetch(`${API}/user/${username}`);
+    const response = await fetch(`${API}/api/user?username=${encodeURIComponent(username)}`);
 
     if (!response.ok) {
         throw new Error("Failed to get user ID.");
