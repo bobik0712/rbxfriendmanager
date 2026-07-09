@@ -6,7 +6,7 @@ async function getUserId(username) {
 
     const url = `${API}/api/user?username=${encodeURIComponent(username)}`;
 
-    console.log("URL:", url);
+    console.log("REQUEST URL:", url);
 
     const response = await fetch(url);
 
