@@ -8,10 +8,20 @@ async function getUserId(username) {
     );
 
     if (!response.ok) {
-        throw new Error("Failed to get user ID.");
+
+        const text = await response.text();
+
+        console.error("Server response:", text);
+
+        throw new Error(
+            `User API Error: ${response.status}`
+        );
+
     }
 
     const data = await response.json();
+
+    console.log(data);
 
     return data.id;
 
