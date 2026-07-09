@@ -55,7 +55,7 @@ async function loadFriends(userId) {
 
 }
 
-async function displayFriends(friends) {
+function displayFriends(friends) {
 
     const grid = document.getElementById("friendGrid");
 
@@ -63,14 +63,12 @@ async function displayFriends(friends) {
 
     for (const friend of friends) {
 
-        const avatar = await getAvatar(friend.id);
-
         const card = document.createElement("div");
 
         card.className = "friend-card";
 
         card.innerHTML = `
-            <img src="${avatar}" alt="${friend.name}">
+            <img src="${friend.avatar}" alt="${friend.name}">
             <h3>${friend.displayName}</h3>
             <p>@${friend.name}</p>
         `;
